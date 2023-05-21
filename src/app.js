@@ -5,13 +5,24 @@ import "./style.css";
 import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
-window.onload = function() {
-  //write your code here
-  document.querySelector("#domain").innerHTML = domainGenerator();
-  console.log("Hello Rigo from the console!");
-};
+const myListDomain = [];
 
-let domainGenerator = function onload() {
+function showDomains() {
+  const listDomains = document.getElementById("domains");
+  while (listDomains.firstChild) {
+    console.log(listDomains.firstChild);
+    listDomains.removeChild(listDomains.firstChild);
+  }
+  myListDomain.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    listDomains.appendChild(li);
+  });
+}
+
+let button = document.getElementById("submit");
+button.onclick = GenerateDomain;
+function GenerateDomain(evento) {
   const prefixes = ["my", "your", "our", "the", "a", "an"];
   const keywords = [
     "website",
@@ -28,5 +39,8 @@ let domainGenerator = function onload() {
   const keyword = keywords[Math.floor(Math.random() * keywords.length)];
   const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
   const name = `${prefix}-${keyword}${suffix}`;
-  return name;
-};
+  if (!myListDomain.includes(name)) {
+    myListDomain.push(name);
+  }
+  showDomains();
+}
