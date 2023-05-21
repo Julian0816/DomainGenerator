@@ -5,38 +5,28 @@ import "./style.css";
 import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
-const cardSuits = ["♦", "♥", "♠", "♣"];
-const cardValue = [
-  "A",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "J",
-  "Q",
-  "K"
-];
-
 window.onload = function() {
   //write your code here
-  let randomNumber = Math.floor(Math.random() * 4);
-  console.log(randomNumber);
+  document.querySelector("#domain").innerHTML = domainGenerator();
+  console.log("Hello Rigo from the console!");
+};
 
-  let colorPicker = document.getElementsByClassName("suit");
-  colorPicker[0].classList.add("top");
-  colorPicker[1].classList.add("bottom");
+let domainGenerator = function onload() {
+  const prefixes = ["my", "your", "our", "the", "a", "an"];
+  const keywords = [
+    "website",
+    "blog",
+    "portal",
+    "hub",
+    "center",
+    "platform",
+    "space"
+  ];
+  const suffixes = [".com", ".net", ".org", ".io", ".me"];
 
-  for (let i = 0; i < colorPicker.length; i++) {
-    if (randomNumber === 0 || randomNumber === 1) {
-      colorPicker[i].style.color = "red";
-    }
-    colorPicker[i].innerHTML = cardSuits[randomNumber];
-  }
-  document.getElementById("cardValue").innerHTML =
-    cardValue[Math.floor(Math.random() * 12)];
+  const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+  const keyword = keywords[Math.floor(Math.random() * keywords.length)];
+  const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+  const name = `${prefix}-${keyword}${suffix}`;
+  return name;
 };
